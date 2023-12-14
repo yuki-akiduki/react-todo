@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import Heading from './Heading';
 import List from './List';
-import Form from './From';
-import End from './End';
+import Form from './Form';
+interface TodoItem {
+  id: number;
+  content: string;
+}
 
 const Todo = () => {
+
   const todoList = [
     {
       id: 1,
@@ -19,12 +24,25 @@ const Todo = () => {
     },
   ];
 
+  const [todos , setTodos] = useState<TodoItem[]>(todoList);
+  const deleateTodo = (id:number) => {
+    const newTodos = todos.filter((todo) => {
+      return todo.id !== id;
+    });
+
+
+    setTodos(newTodos);
+  }
+
+  const createTodo = (todo:TodoItem) => {
+    setTodos([...todos, todo])
+  }
+
   return (
     <>
       <Heading text = 'これは見出しです'/>
-      <List />
-      <Form />
-      <End />
+      <List todos = {todos} deleateTodo = {deleateTodo} />
+      <Form createTodo = {createTodo} />
     </>
   )
 };
