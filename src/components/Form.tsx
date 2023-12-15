@@ -16,6 +16,7 @@ const Form = ({createTodo}:Props) => {
       content: enterTodo
     }
     createTodo(newTodo);
+    setEnterTodo('')
   }
   return (
     <>
