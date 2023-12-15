@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Heading from './Heading';
 import List from './List';
 import Form from './Form';
+import End from './End';
 interface TodoItem {
   id: number;
   content: string;
@@ -25,13 +26,16 @@ const Todo = () => {
   ];
 
   const [todos , setTodos] = useState<TodoItem[]>(todoList);
+  const [endTask, setEndTask]= useState<TodoItem[]>([]);
   const deleateTodo = (id:number) => {
     const newTodos = todos.filter((todo) => {
       return todo.id !== id;
     });
-
-
+    const endTodos = todos.filter((todo) => {
+      return todo.id === id
+    });
     setTodos(newTodos);
+    setEndTask([...endTask, ...endTodos]);
   }
 
   const createTodo = (todo:TodoItem) => {
@@ -43,6 +47,7 @@ const Todo = () => {
       <Heading text = 'これは見出しです'/>
       <List todos = {todos} deleateTodo = {deleateTodo} />
       <Form createTodo = {createTodo} />
+      <End endTask = {endTask} />
     </>
   )
 };
