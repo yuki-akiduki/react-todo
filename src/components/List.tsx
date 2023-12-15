@@ -15,14 +15,20 @@ const List = ({todos,deleateTodo}:Props) => {
   return (
     <>
       <div>
-        {todos.map((todo) => {
+
+        {todos.length === 0 ?
+         <div>All clear</div> :
+          (todos.map((todo) => {
           return (
             <div key={todo.id}>
               <button onClick={()=> compleate(todo.id)}>完了する</button>
               <span>{todo.content}</span>
             </div>
           );
-        })}
+        }))}
+
+
+        
       </div>
     </>
   )
